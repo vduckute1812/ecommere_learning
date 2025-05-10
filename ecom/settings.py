@@ -1,17 +1,19 @@
 from pathlib import Path
 import os
-
-#from dotenv import load_dotenv
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load our environmental variables
-# load_dotenv()
+load_dotenv()
 
 
 
-# password DB
+DB_HOST_YO = os.environ['DB_HOST_YO']
+DB_NAME_YO= os.environ['DB_NAME_YO']
+DB_USER_YO= os.environ['DB_USER_YO']
+DB_PORT_YO = os.environ['DB_PORT_YO']
 DB_PASSWORD_YO = os.environ['DB_PASSWORD_YO']
 
 
@@ -24,9 +26,9 @@ SECRET_KEY = 'django-insecure-x4m$gfeda-r+)u05g*bzm%8#_vz&8-wl^3epo45gqi#_eqwvtq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://djangotest.com', 'djangotest.com', 'django-ecommerce-production-81b6.up.railway.app', 'https://django-ecommerce-production-81b6.up.railway.app']
-CSRF_TRUSTED_ORIGINS = ['https://djangotest.com', 'https://django-ecommerce-production-81b6.up.railway.app']
-
+# ALLOWED_HOSTS = ['https://djangotest.com', 'djangotest.com', 'django-ecommerce-production-81b6.up.railway.app', 'https://django-ecommerce-production-81b6.up.railway.app']
+# CSRF_TRUSTED_ORIGINS = ['https://djangotest.com', 'https://django-ecommerce-production-81b6.up.railway.app']
+ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
@@ -82,15 +84,15 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
+        'NAME': DB_NAME_YO,
+        'USER': DB_USER_YO,
         'PASSWORD': DB_PASSWORD_YO,
-        'HOST': 'viaduct.proxy.rlwy.net',
-        'PORT': '23278',
-        
+        'HOST': DB_HOST_YO,
+        'PORT': DB_PORT_YO,
+
     }
 }
 
