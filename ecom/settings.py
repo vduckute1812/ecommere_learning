@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -83,18 +84,23 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         # 'ENGINE': 'django.db.backends.sqlite3',
+#         # 'NAME': BASE_DIR / 'db.sqlite3',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': DB_NAME_YO,
+#         'USER': DB_USER_YO,
+#         'PASSWORD': DB_PASSWORD_YO,
+#         'HOST': DB_HOST_YO,
+#         'PORT': DB_PORT_YO,
+#     }
+# }
 DATABASES = {
-    'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': DB_NAME_YO,
-        'USER': DB_USER_YO,
-        'PASSWORD': DB_PASSWORD_YO,
-        'HOST': DB_HOST_YO,
-        'PORT': DB_PORT_YO,
-
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get("DATABASE_URL"),
+        conn_max_age=600
+    )
 }
 
 
